@@ -18,17 +18,22 @@ import           System.Process             (system)
 
 main = daemonize $ do
   file:[] <- getArgs
+  -- Get the length of the log file.
   offset  <- withFile file ReadMode $ (\h -> hSeek h SeekFromEnd 0 >> hTell h)
   stop    <- newEmptyMVar
   n       <- initINotify
   m       <- newMVar offset
-  desc    <- addWatch n [Modify] file (updateiptables m file)
+  -- Watch for modification.
+  desc    <- addWatch n [Modify] file (callback m file)
+  -- wait forever
   takeMVar stop
   removeWatch desc
   return ()
 
-updateiptables :: MVar Integer -> FilePath -> Event -> IO ()
-updateiptables m fp (Modified _ _) = do
+-- | Seek to the point 'm'. Starting from 'm', get contents until the
+-- end of the logfile. give it to 'processLogLine'.
+callback :: MVar Integer -> FilePath -> Event -> IO ()
+callback m fp (Modified _ _) = do
   off <- takeMVar m
   hdl <- openFile fp ReadMode
   hSeek hdl AbsoluteSeek off
@@ -38,6 +43,8 @@ updateiptables m fp (Modified _ _) = do
   hClose hdl
   return ()
 
+-- | Parse the Group ID and source IP of the snort alert. Use iptables
+-- to block the source IP if gid==115.
 processLogLine xs = do
   let gid = parseGid xs
       ip  = parseSrcIp xs
@@ -45,6 +52,7 @@ processLogLine xs = do
     (115, Just x) -> blacklist x >> return ()
     _             -> return ()
 
+-- | Execute iptables
 blacklist ip = system . T.unpack $ "iptables -I FORWARD -i eth0 -s " `T.append` ip `T.append` " -j REJECT"
 
 parseSrcIp :: T.Text -> Maybe T.Text
