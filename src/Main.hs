@@ -12,16 +12,18 @@ import           Network.URI
 import           System.Environment         (getArgs)
 import           System.INotify
 import           System.IO
+import           System.Posix.Daemonize     (daemonize)
 import           System.Process             (system)
 ------------------------------------------------------------------------------
 
-main = do
+main = daemonize $ do
   file:[] <- getArgs
   offset  <- withFile file ReadMode $ (\h -> hSeek h SeekFromEnd 0 >> hTell h)
+  stop    <- newEmptyMVar
   n       <- initINotify
   m       <- newMVar offset
   desc    <- addWatch n [Modify] file (updateiptables m file)
-  stop    <- getLine
+  takeMVar stop
   removeWatch desc
   return ()
 

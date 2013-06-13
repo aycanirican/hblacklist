@@ -27,3 +27,4 @@ executable hblacklist
     , attoparsec
     , text
     , process
+    , hdaemonize
