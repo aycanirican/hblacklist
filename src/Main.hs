@@ -53,7 +53,7 @@ processLogLine xs = do
     _             -> return ()
 
 -- | Execute iptables
-blacklist ip = system . T.unpack $ "iptables -I FORWARD -i eth0 -s " `T.append` ip `T.append` " -j REJECT"
+blacklist ip = system . T.unpack $ "iptables -I FORWARD -p tcp -s " `T.append` ip `T.append` " -j REJECT"
 
 parseSrcIp :: T.Text -> Maybe T.Text
 parseSrcIp line = let ipstr = extractip . extractsrcsection . extractipsection $ line in
