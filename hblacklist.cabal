@@ -28,3 +28,18 @@ executable hblacklist
     , text
     , process
     , hdaemonize
+
+executable hblacklistCT
+  Default-language: Haskell2010
+  hs-source-dirs: src
+  main-is: MainCT.hs
+  -- other-modules:       
+  build-depends:
+      base ==4.6.*
+    , hinotify
+    , network
+    , attoparsec
+    , text
+    , process
+    , hdaemonize
+
