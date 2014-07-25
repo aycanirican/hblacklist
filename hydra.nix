@@ -10,7 +10,7 @@ in
 
 cabal.mkDerivation (self: {
   pname = "hblacklist";
-  src = hblacklistSrc
+  src = hblacklistSrc;
   isLibrary = false;
   isExecutable = true;
   preConfigure = ''rm -rf dist'';
