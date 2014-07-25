@@ -21,7 +21,7 @@ executable hblacklist
   main-is: Main.hs
   -- other-modules:       
   build-depends:
-      base ==4.6.*
+      base >= 4.6 && < 4.8
     , hinotify
     , network
     , attoparsec
@@ -35,11 +35,10 @@ executable hblacklistCT
   main-is: MainCT.hs
   -- other-modules:       
   build-depends:
-      base ==4.6.*
+      base >= 4.6 && < 4.8
     , hinotify
     , network
     , attoparsec
     , text
     , process
     , hdaemonize
-
