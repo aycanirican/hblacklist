@@ -11,6 +11,7 @@ in
 cabal.mkDerivation (self: {
   pname = "hblacklist";
   src = hblacklistSrc;
+  version = hblacklistSrc.gitTag;
   isLibrary = false;
   isExecutable = true;
   preConfigure = ''rm -rf dist'';
