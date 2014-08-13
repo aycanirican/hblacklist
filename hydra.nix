@@ -7,7 +7,7 @@
 let
   haskellPackages = nixpkgs.haskellPackages;
   inherit (haskellPackages) cabal;
-  myHademonize = hdaemonize;
+  myHdaemonize = hdaemonize;
 in
 
 cabal.mkDerivation (self: {
