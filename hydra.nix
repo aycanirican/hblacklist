@@ -1,11 +1,13 @@
 { system ? builtins.currentSystem
 , nixpkgs
 , hblacklistSrc
+, hdaemonize
 }:
 
 let
   haskellPackages = nixpkgs.haskellPackages;
   inherit (haskellPackages) cabal;
+  myHademonize = hdaemonize;
 in
 
 cabal.mkDerivation (self: {
@@ -17,7 +19,7 @@ cabal.mkDerivation (self: {
   preConfigure = ''rm -rf dist'';
   noHaddock = true;
   buildDepends = with haskellPackages;[ 
-    attoparsec hdaemonize hinotify network text 
+    myHdaemonize attoparsec hinotify network text 
   ];
   meta = {
     homepage = "http://github.com/aycanirican/hblacklist";
