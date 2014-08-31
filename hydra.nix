@@ -1,11 +1,11 @@
 { system ? builtins.currentSystem
-, nixpkgs
+, pkgs
 , hblacklistSrc
 }:
 
 let
-  haskellPackages = nixpkgs.haskellPackages;
-  inherit (haskellPackages) cabal;
+  hs = pkgs.haskellPackages;
+  inherit (hs) cabal;
 in
 
 cabal.mkDerivation (self: {
@@ -16,7 +16,7 @@ cabal.mkDerivation (self: {
   isExecutable = true;
   preConfigure = ''rm -rf dist'';
   noHaddock = true;
-  buildDepends = with haskellPackages;[ 
+  buildDepends = with pkgs.haskellPackages;[ 
     hdaemonize attoparsec hinotify network text 
   ];
   meta = {
@@ -25,6 +25,6 @@ cabal.mkDerivation (self: {
     license = self.stdenv.lib.licenses.bsd3;
     platforms = self.ghc.meta.platforms;
   };
-  buildTools = [ haskellPackages.cabalInstall_1_20_0_3 ];
+  buildTools = [ hs.cabalInstall_1_20_0_3 ];
   enableSplitObjs = false;
 })
