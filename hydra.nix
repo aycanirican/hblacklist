@@ -17,7 +17,7 @@ cabal.mkDerivation (self: {
   preConfigure = ''rm -rf dist'';
   noHaddock = true;
   buildDepends = with pkgs.haskellPackages;[ 
-    hdaemonize attoparsec hinotify network text 
+    hdaemonize attoparsec hinotify network text networkUri
   ];
   meta = {
     homepage = "http://github.com/aycanirican/hblacklist";
