@@ -24,6 +24,7 @@ executable hblacklist
       base >= 4.6 && < 4.8
     , hinotify
     , network
+    , network-uri
     , attoparsec
     , text
     , process
@@ -38,6 +39,7 @@ executable hblacklistCT
       base >= 4.6 && < 4.8
     , hinotify
     , network
+    , network-uri
     , attoparsec
     , text
     , process
