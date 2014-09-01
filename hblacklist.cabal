@@ -23,7 +23,7 @@ executable hblacklist
   build-depends:
       base >= 4.6 && < 4.8
     , hinotify
-    , network
+    , network >= 2.6.0.0
     , network-uri
     , attoparsec
     , text
@@ -38,7 +38,7 @@ executable hblacklistCT
   build-depends:
       base >= 4.6 && < 4.8
     , hinotify
-    , network
+    , network >= 2.6.0.0
     , network-uri
     , attoparsec
     , text
