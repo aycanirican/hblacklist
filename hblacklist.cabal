@@ -15,32 +15,38 @@ category:            Network
 build-type:          Simple
 cabal-version:       >=1.10
 
+flag old-network-uri
+   description: use Network.URI from network package.
+   default: False
+
 executable hblacklist
   Default-language: Haskell2010
   hs-source-dirs: src
   main-is: Main.hs
-  -- other-modules:       
   build-depends:
       base >= 4.6 && < 4.8
     , hinotify
-    , network >= 2.6.0.2
-    , network-uri
     , attoparsec
     , text
     , process
     , hdaemonize
+  if flag(old-network-uri)
+    build-depends: network-uri < 2.6, network < 2.6
+  else
+    build-depends: network-uri >= 2.6, network >= 2.6
 
 executable hblacklistCT
   Default-language: Haskell2010
   hs-source-dirs: src
   main-is: MainCT.hs
-  -- other-modules:       
   build-depends:
       base >= 4.6 && < 4.8
     , hinotify
-    , network >= 2.6.0.2
-    , network-uri
     , attoparsec
     , text
     , process
     , hdaemonize
+  if flag(old-network-uri)
+    build-depends: network-uri < 2.6, network < 2.6
+  else
+    build-depends: network-uri >= 2.6, network >= 2.6
