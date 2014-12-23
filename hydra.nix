@@ -25,6 +25,6 @@ cabal.mkDerivation (self: {
     license = self.stdenv.lib.licenses.bsd3;
     platforms = self.ghc.meta.platforms;
   };
-  buildTools = [ hs.cabalInstall_1_20_0_3 ];
+  buildTools = [ hs.cabalInstall ];
   enableSplitObjs = false;
 })
