@@ -24,7 +24,7 @@ executable hblacklist
   hs-source-dirs: src
   main-is: Main.hs
   build-depends:
-      base >= 4.6 && < 4.8
+      base >= 4.6 && < 4.9
     , hinotify
     , attoparsec
     , text
@@ -40,7 +40,7 @@ executable hblacklistCT
   hs-source-dirs: src
   main-is: MainCT.hs
   build-depends:
-      base >= 4.6 && < 4.8
+      base >= 4.6 && < 4.9
     , hinotify
     , attoparsec
     , text
