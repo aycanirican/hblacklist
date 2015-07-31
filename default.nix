@@ -7,6 +7,8 @@ mkDerivation {
   src = ./.;
   isLibrary = false;
   isExecutable = true;
+  enableSharedLibraries = false;
+  enableSharedExecutables = false;
   buildDepends = [
     attoparsec base hdaemonize hinotify network network-uri process
     text
